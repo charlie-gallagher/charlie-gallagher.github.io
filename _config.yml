@@ -1,5 +1,5 @@
 # Site settings
-title: Charlie Gallagher
+title: Charlie Gallagher on Programming
 description: Personal blog and website
 url: "https://charlie-gallagher.github.io"
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -27,6 +27,10 @@ exclude:
 # Minimal Mistakes theme settings
 minimal_mistakes_skin: default # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
+# Enable copy code button
+enable_copy_code_button: true
+
+
 # Site author
 author:
   name: "Charlie Gallagher"
@@ -53,11 +57,11 @@ defaults:
       type: posts
     values:
       layout: single
-      read_time: true
+      read_time: false
       comments: false
       share: true
       related: true
-      author_profile: true
+      author_profile: false
 
 # Pagination (optional)
 paginate: 5
