@@ -27,8 +27,9 @@ exclude:
 # Minimal Mistakes theme settings
 minimal_mistakes_skin: default # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
-# Enable copy code button
+# Other settings
 enable_copy_code_button: true
+search: true
 
 
 # Site author
@@ -42,9 +43,9 @@ author:
     # - label: "Website"
     #   icon: "fas fa-fw fa-link"
     #   url: "https://your-website.com"
-    # - label: "Twitter"
-    #   icon: "fab fa-fw fa-twitter-square"
-    #   url: "https://twitter.com/yourusername"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://x.com/charliegallaghr"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/charlie-gallagher"
@@ -59,8 +60,8 @@ defaults:
       layout: single
       read_time: false
       comments: false
-      share: true
-      related: true
+      share: false
+      related: false
       author_profile: false
 
 # Pagination (optional)
