@@ -1,16 +1,16 @@
 # Site settings
 title: Charlie Gallagher
 description: Personal blog and website
-author: Charlie Gallagher
-email: # your-email@example.com
 url: "https://charlie-gallagher.github.io"
 baseurl: "" # the subpath of your site, e.g. /blog
 
 # Build settings
+theme: minimal-mistakes-jekyll
 markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-include-cache
 
 # Exclude from processing
 exclude:
@@ -24,8 +24,40 @@ exclude:
   - .git
   - .github
 
-# Theme settings (optional - you can use a theme or build custom)
-# theme: minima
+# Minimal Mistakes theme settings
+minimal_mistakes_skin: default # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+
+# Site author
+author:
+  name: "Charlie Gallagher"
+  avatar: "/assets/images/bio-photo.jpg" # path to avatar image
+  bio: "Personal blog and website"
+  location: "Philadelphia, PA"
+  email: charlie@ixisdigital.com
+  links:
+    # - label: "Website"
+    #   icon: "fas fa-fw fa-link"
+    #   url: "https://your-website.com"
+    # - label: "Twitter"
+    #   icon: "fab fa-fw fa-twitter-square"
+    #   url: "https://twitter.com/yourusername"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/charlie-gallagher"
+
+# Defaults
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      read_time: true
+      comments: false
+      share: true
+      related: true
+      author_profile: true
 
 # Pagination (optional)
 paginate: 5

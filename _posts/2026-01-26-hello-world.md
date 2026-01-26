@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "Hello, world!"
 date: 2026-01-26
 ---
