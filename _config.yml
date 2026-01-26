@@ -5,7 +5,7 @@ url: "https://charlie-gallagher.github.io"
 baseurl: "" # the subpath of your site, e.g. /blog
 
 # Build settings
-theme: minimal-mistakes-jekyll
+remote_theme: "mmistakes/minimal-mistakes@4.27.3"
 markdown: kramdown
 plugins:
   - jekyll-feed
