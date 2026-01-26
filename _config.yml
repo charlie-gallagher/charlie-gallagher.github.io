@@ -1,0 +1,33 @@
+# Site settings
+title: Charlie Gallagher
+description: Personal blog and website
+author: Charlie Gallagher
+email: # your-email@example.com
+url: "https://charlie-gallagher.github.io"
+baseurl: "" # the subpath of your site, e.g. /blog
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - .git
+  - .github
+
+# Theme settings (optional - you can use a theme or build custom)
+# theme: minima
+
+# Pagination (optional)
+paginate: 5
+paginate_path: "/page:num/"
+
