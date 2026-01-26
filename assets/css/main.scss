@@ -1,0 +1,129 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@charset "utf-8";
+
+// https://github.com/KrisvanderMast/KrisvanderMast.github.io/blob/master/assets/_scss/_variables.scss
+
+/* paragraph indention */
+$paragraph-indent           : false; // true, false (default)
+$indent-var                 : 1.3em;
+
+/* system typefaces */
+$serif                      : Georgia, Times, serif;
+$sans-serif                 : -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+$monospace                  : Monaco, Consolas, "Lucida Console", monospace;
+
+/* sans serif typefaces */
+$sans-serif-narrow          : $sans-serif;
+$helvetica                  : Helvetica, "Helvetica Neue", Arial, sans-serif;
+
+/* serif typefaces */
+$georgia                    : Georgia, serif;
+$times                      : Times, serif;
+$bodoni                     : "Bodoni MT", serif;
+$calisto                    : "Calisto MT", serif;
+$garamond                   : Garamond, serif;
+
+$global-font-family         : $sans-serif;
+$header-font-family         : $sans-serif;
+$caption-font-family        : $serif;
+
+$quote-blue-color           : #1da1f2;
+$primary-cream              : #b2d9f1;
+$cream-color                : #f4f4f4;
+
+// https://stackoverflow.com/questions/73789719/how-to-override-theme-defaults-for-minimal-mistakes-theme
+// $info-color                 : $quote-blue-color;
+// $link-color                 : $info-color;
+
+/* type scale */
+$type-size-1: 2.441em !default;
+$type-size-2: 1.953em !default;
+$type-size-3: 1.563em !default;
+$type-size-4: 1.25em !default;
+$type-size-5: 1.1em !default;
+$type-size-6: 0.8em !default;
+$type-size-7: 0.8em !default;
+$type-size-8: 0.625em !default;
+
+/* headline scale */
+$h-size-1: 1.563em !default;
+$h-size-2: 1.25em !default;
+$h-size-3: 1.125em !default;
+$h-size-4: 1.0625em !default;
+$h-size-5: 1.03125em !default;
+$h-size-6: 1em !default;
+
+// *************************************************************
+// !! ALL VARIABLE DECLARATIONS MUST BE BEFORE THIS STATEMENT !!
+// *************************************************************
+
+@import "minimal-mistakes";
+
+// https://github.com/mmistakes/minimal-mistakes/discussions/1352#discussioncomment-2074482
+// If you adjust your /assets/css/main.scss like suggested in #1219:
+// You'll have to first set variables (like those in _variables.scss), then import minimal mistakes, and finally write the html code.
+// The html part will set the default font size (i.e. the text font size within your posts). The type-size variables on the other hand will set font size for other elements like table of content etc., relative to the default size specified in the html block.
+// As an example here's my /assets/css/main.css:
+
+// Thanks MoritzLange :)
+html {
+    font-size: 14px; // change to whatever
+
+    @include breakpoint($medium) {
+      font-size: 14px; // change to whatever
+    }
+
+    @include breakpoint($large) {
+      font-size: 15px; // change to whatever
+    }
+
+    @include breakpoint($x-large) {
+      font-size: 16px; // change to whatever
+    }
+  }
+
+
+blockquote {
+  margin: 0em; // Remove all margin (push on the left)
+  margin-block: 2em; // Used to be 20www0ww
+  margin-inline-end: 1em;
+  padding-inline: 0.5em;
+  font-style: italic;
+  border-inline-start: 0.25em solid $quote-blue-color;
+  background-color: $cream-color;
+  border-top-right-radius: 8px; // Rounded top-right corner
+  border-bottom-right-radius: 8px; // Rounded bottom-right corner
+
+  cite {
+    font-style: italic;
+
+    &::before {
+      content: "\2014";
+      padding-inline-end: 5px;
+    }
+  }
+}
+
+// Change the table of contents on the right hand side
+// Set toc_label in the header to change contents
+// .toc .nav__title {
+//   background: dodgerblue;
+// }
+
+// Change the table of contents on the right hand side
+.h1 {
+  text-decoration: underline;
+  text-decoration-color: dodgerblue; // Specify the underline color
+  }
+
+// Change the image on the left hand side
+.author__avatar img {
+  max-width: 110px;
+  border-radius: 15%; // 50 is circle
+  // border-width:5px;
+  // border-color: dodgerblue;
+  padding: 0;
+}

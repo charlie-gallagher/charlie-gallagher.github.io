@@ -19,4 +19,8 @@ And here's the last tech (adjacent) talk I watched:
 {: .notice--info}
 One thing I like to mention on these posts is that I'm a nerd.
 
+Have you heard this quote?
+
+> With great power comes great responsibility.
+
 [^1]: This footnote explains what's going on.

@@ -72,8 +72,8 @@ defaults:
       share: false
       related: false
       author_profile: false
-      toc: true
-      toc_sticky: true
+      # toc: true
+      # toc_sticky: true
 
 # Pagination (optional)
 paginate: 5
