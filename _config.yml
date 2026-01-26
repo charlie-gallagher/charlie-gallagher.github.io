@@ -8,7 +8,6 @@ baseurl: "" # the subpath of your site, e.g. /blog
 remote_theme: "mmistakes/minimal-mistakes@4.27.3"
 markdown: kramdown
 plugins:
-  - jekyll-feed
   - jekyll-sitemap
   - jekyll-include-cache
 
