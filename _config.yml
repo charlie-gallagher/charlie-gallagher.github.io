@@ -37,14 +37,10 @@ search: true
 # Site author
 author:
   name: "Charlie Gallagher"
-  avatar: "/assets/images/bio-photo.jpg" # path to avatar image
+  avatar: "/assets/images/bio-photo.jpg"
   bio: "Personal blog and website"
   location: "Philadelphia, PA"
-  email: charlie@ixisdigital.com
   links:
-    # - label: "Website"
-    #   icon: "fas fa-fw fa-link"
-    #   url: "https://your-website.com"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://x.com/charliegallaghr"
@@ -71,7 +67,7 @@ defaults:
       comments: false
       share: false
       related: false
-      author_profile: false
+      author_profile: true
       # toc: true
       # toc_sticky: true
 
