@@ -12,6 +12,8 @@ plugins:
   - jekyll-sitemap
   - jekyll-include-cache
 
+include: ["_pages"]
+
 # Exclude from processing
 exclude:
   - Gemfile
@@ -52,6 +54,13 @@ author:
 
 # Defaults
 defaults:
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
   # _posts
   - scope:
       path: ""
@@ -63,6 +72,8 @@ defaults:
       share: false
       related: false
       author_profile: false
+      toc: true
+      toc_sticky: true
 
 # Pagination (optional)
 paginate: 5
