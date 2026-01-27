@@ -118,4 +118,8 @@ authority come from? How is UTC defined? And for that, I don't have space on
 this blog. Let's just be grateful that thanks to NTP, we don't have to worry
 about it.
 
+## Postscript
+If you run Linux and want to see exactly what your `ntpd` daemon is up to, try
+out `ntpviz` from the NTPsec project. Details here: https://blog.ntpsec.org/2016/12/19/ntpviz-intro.html
+
 
