@@ -111,7 +111,7 @@ authority based on how many hops you are from an atomic clock. Time sources are
 stratified. The atomic clocks belong to Stratum 1, and anyone who gets their
 time directly from an atmoic clock is in Stratum 2, and so on. Part of the NTP
 exchange is comparing stratum and selecting the authority base on whose number
-is lower. The "loser" sets their stratum to `s_authority - 1`.
+is lower. The "loser" sets their stratum to `s_authority + 1`.
 
 And you might then ask, are all atomic clocks created equal? Where does that
 authority come from? How is UTC defined? And for that, I don't have space on
