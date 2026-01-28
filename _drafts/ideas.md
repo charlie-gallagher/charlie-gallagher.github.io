@@ -19,6 +19,10 @@
     - [ ] The guy who owns all the turntable manuals
     - [ ] Reel theft -- predecessor of modern piracy
     - [ ] Satellites and timekeeping
+        - [ ] "The ntpd utility can synchronize time to a theoretical precision
+          of about 232 picoseconds. In practice, this limit is unattainable due
+to quantum limits on the clock speed of ballistic-electron logic."
+(https://docs.ntpsec.org/latest/ntpd.html) "That darn ballistic-electron logic."
     - [ ] Friend presentations
     - [ ] 
     - [ ] 
