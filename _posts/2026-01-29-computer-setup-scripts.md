@@ -14,8 +14,8 @@ libraries and programs through Homebrew.
 I already use `stow` to [manage my dotfiles](https://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html?round=two)
 so a lot of my configuration is taken care of with a few quick stows. But what I
 really needed was an automated checklist that told me how close my configuration
-was to the "target" laptop. It's a cheap declarative setup, like a vastly
-simpler terraform or nix.
+was to the "target" laptop. It's a cheap declarative setup, like a simpler
+terraform or nix.
 
 Here's an example checklist (with no color):
 
