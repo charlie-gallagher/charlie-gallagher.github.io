@@ -1,5 +1,6 @@
 - [ ] Blogpost ideas:
     - [x] The unreasonable effectiveness of a text to-do list
+    - [x] Computer setup scripts -- go beyond install scripts
     - [ ] No race is won in the first corner, but many are lost in it. How to start something new.
     - [ ] My kinda blog
     - [ ] A company blog
@@ -8,7 +9,6 @@
     - [ ] Lazy replication in pure python
     - [ ] Try out https://docs.ntpsec.org/latest/ntpviz.html, see https://blog.ntpsec.org/2016/12/19/ntpviz-intro.html for help
     - [ ] Data visualization scaling using ggunit
-    - [ ] Computer setup scripts -- go beyond install scripts
     - [ ] Safari as a daily driver in place of Chrome
     - [ ] Read old papers, read the source
     - [ ] Good questions for MRs
