@@ -4,6 +4,15 @@ title: "That darn ballistic-electron logic"
 date: 2026-01-30
 ---
 
+Other titles:
+
+- On time
+- Subtle atomic conspiracies
+
+To my coworker who asked me the difference between GMT and UTC: I hope you're
+happy with what you've done to me.
+
+# Have the time?
 
 > The ntpd utility can synchronize time to a theoretical precision of about 232
 > picoseconds. In practice, this limit is unattainable due to quantum limits on
@@ -11,7 +20,6 @@ date: 2026-01-30
 >
 > (https://docs.ntpsec.org/latest/ntpd.html)
 
-# Have the time?
 I always assumed I was using ntpd to keep time on my linux computer. But I was
 only sort of right.
 
@@ -119,7 +127,7 @@ all, who cares what the time is if no one's there to see it?
 >
 > Henri Poincaré
 
-What would it take for _me_ to serve time to others? NTP servers listen on port
+What would it take for me to serve time to others? NTP servers listen on port
 123 and usually work only over UDP, so I suppose the simple way to serve time is
 to start ntpd in server mode, start listening, and configure someone to use you
 ask their authority.
@@ -152,41 +160,68 @@ the pool would probably create too big a wave.
 
 All this had me wondering, where does authority in timekeeping come from? Who
 has the time? I'm only an hour's drive away from the [National Clock and Watch
-Museum](https://museum.nawcc.org), and after visit, notbook in hand, a few dozen
-hours of followup research, I'm still not sure.
+Museum](https://museum.nawcc.org), and after visit, notbook in hand, and a few
+dozen hours of followup research, I'm still not sure.
 
 What I have learned is this. We get our sense of time from the periodic
 movements of the starry firmament -- the sun, the seasons, the stars. And our
 bodies (along with most organisms on Earth) have built-in timers that encourage
 us to do those activities that keep us alive. It's been a while since you ate,
-the sun is down, which when you normally sleep, and so on. Biological clocks (as
-anyone with a cat will tell you) can be extremely precise.
-
-We also seem to be hardwired to prefer coordinated time. One of the earliest
-forms of coordinated time is yawning, which we all know is evolutionarily
-contagious.
+the sun is down, which when you normally sleep, and so on. We also seem to be
+hardwired to prefer coordinated time. One of the earliest forms of coordinated
+time is yawning, which we know is evolutionarily contagious.
 
 At the moment my interest in timekeeping isn't how we developed precision
 clocks, but how we managed to coordinate ourselves using those clocks. _Why_ we
-coordinate ourselves using those clocks.
+coordinate ourselves using those clocks. What even is a clock? If all of the
+atomic clocks in the world stopped ticking for 10 minutes, would we be able to
+recover "the time"? (These were early questions. It turns out the question isn't
+correctly phrased -- more on that later.)
 
-Early religion (who?) temporalized life with its emphasis on doing certain
-religious acts multiple times a day. Some of the earliest interesting clock-like
-devices we have are from monasteries that rang bells at specific times. (And the
-word _clock_ is derived from the French word for bell.) This went on for a few
-hundred years.
+We've had a grip on calendars for a long time. "By the 14th century BC the Shang
+Chinese had established the solar year as 365.25 days and the lunar month as
+29.5 days," (RFC 1305). By 432 BC, the Greek astronomer Meton had estimated the
+lunar month (the time it takes for the moon to circle the earth) to within about
+2 minutes of the currently understood value.
 
-The next advance was periodic time. Time used to be more organic than it is
-today. Hours were not equally sized, and the day was not split equally into 24
-parts. But somewhere, at some time, Europeans made an intuitive leap from
+Time-curious cultures became duly obsessed with the frequency and stability of
+our cosmic oscillators (the Earth's rotation and orbit around the sun, the
+moon's orbit around the Earth), and everyone who was anyone had a calendar that
+tried to match the motions of the cosmos with their version of a predictable
+and convenient "civilian" calendar.
+
+The story of calendars is knotty, but suffice to say that it involves some
+guesswork. The best case for understanding the orders of events in the old days
+is having what Mills calls (in RFC 1305) "an accurate count of the days relative
+to some globally alarming event, such as a comet passage or supernova
+explosion."
+
+And so calendars are social. The civil calendar had to be convenient and fit
+into the activities of daily life, and ordering of events depends on some
+collective consciousness around global events. I've been surprised by how often
+we make clocks and calendars fit into daily life and not the other way around.
+It's no exaggeration that even the most precise modern timekeeping today is
+based on what feels right and looks right.
+
+Calendars order our years; clocks order our days. Early religion (who?)
+temporalized daily life by requiring certain religious acts to be done multiple
+times a day. Some of the earliest interesting clock-like devices we have are
+from monasteries that rang bells at specific times. (And the word _clock_ is
+derived from the French word for bell.) This went on for a few hundred years.
+
+The next advance was periodic timekeepers. Time used to be more organic than it
+is today. Hours were not equally sized, and the day was not split equally into
+24 parts. But somewhere, at some time, Europeans made an intuitive leap from
 continuous time devices like the clepsydra or the procession of different stars
-and planets to discrete time -- time as ticks[^1]. In _Revolution in Time_, David
-Landes considers this one of the great methodological leaps in western
-civilization, coming seemingly out of no where.  It took other cultures another
-500 years to begin using oscillating, periodic timekeepers.
+and planets to discrete time -- time as ticks[^1]. In _Revolution in Time_,
+David Landes considers this one of the great methodological leaps in western
+civilization. It took other cultures another 500 years to begin using
+oscillating, periodic timekeepers.
 
-Nearly as soon as clocks became more convenient and domestic, _punctuality_
-became an important social cue.
+Clocks have their social uses. Nearly as soon as clocks became convenient and
+domestic, _punctuality_ became an important social cue. And as life became more
+connected with trade, trains, and radio, the pragmatic importance of clocks only
+increased. You don't want to miss your train.
 
 [^1]: Escapements convert potential energy (like a falling weight suspended by a rope) into periodic motion (the ticking of a hand). There's no better visualization of the development of the clock than Bartosz Ciechanowski's [mechanical watch](https://ciechanow.ski/mechanical-watch/). And while these escapements were crude in the beginning, it took only a few breakthroughs until they were able to tell time within a few seconds per day.
 
@@ -201,9 +236,10 @@ sudo apt-get update && sudo apt-get install ntpsec ntpsec-doc ntpsec-ntpviz
 I made sure to enable statistics, because I'm really after visualizations. I
 want to see the thing do stuff. Visualizations are generated using `ntpviz`,
 which is scantily documented (this was helpful but ancient:
-[ntpvis-intro](https://blog.ntpsec.org/2016/12/19/ntpviz-intro.html)). I found
-enough to get me going. But having only just set up my daemon, there's still no
-data to visualize. I took the chance to do some background work on the metrics.
+[ntpvis-intro](https://blog.ntpsec.org/2016/12/19/ntpviz-intro.html)), but I
+found enough to get me going. But having only just set up my daemon, there's
+still no data to visualize. I took the opportunity to do some background work on
+the metrics.
 
 Clocks are never perfectly in sync (even UTC is calculated as an average), and
 the most important contributor to incorrect timekeeping is a difference in
@@ -359,31 +395,33 @@ clocks. Ye old tower clock in most cases was set by sundial, and "none too
 accurately" in the words of the clock museum. Religious clocks were more of a
 suggestion of the time.
 
-Coordination wasn't important in the US until the railroads. When you're
-coordinating a few hundred trains in and out of stations, timekeeping becomes
-quite important. For most of the 19th century, each railroad company had its own
-timekeeping system and standards for accuracy. In the middle of the century,
-there were 144 official time zones in North America alone.
+Coordination wasn't a moral imperative in the US until the railroads. When
+you're coordinating a few hundred trains in and out of stations, timekeeping
+becomes quite important. For most of the 19th century, each railroad company had
+its own timekeeping system and standards for accuracy. The created competing
+definitions of time, and confusion and accidents followed. In the middle of the
+century, there were 144 official time zones in North America alone[^2]. Clearly
+something had to be done.
 
-How do you get 144 time zones? Any move along a line of latitude (i.e. east or
-west) causes the sun's apparent apex to move. When the sun is highest in the sky
-in Pennsylvania, it's still rising in Colorado. Your sundial would in that case
-create infinite time zones for each variation in longitude. The railroads
-"solved" this by using a standard time for each major city they stopped in. You
-got a sort of "average solar time" for this stretch of railroad.
+[^2]: How do you get 144 time zones? Any move along a line of latitude (i.e. east or west) causes the sun's apparent apex to move. When the sun is highest in the sky in Pennsylvania, it's still rising in Colorado. Your sundial would in that case create infinite time zones for each variation in longitude. The railroads "solved" this by using a standard time for each major city they stopped in. You got a sort of "average solar time" for this stretch of railroad.
 
-The railways kept different time, though, and this led to accidents and
-fatalities that finally motivated the US to move to _standard time_ based on
-only 3 main timezones, the same basic ones we use today.
+The accidents and fatalities motivated the US to move to a new definition of
+_standard time_ based on only 3 main timezones, the same basic ones we use
+today.
 
-If you're like me, you might get nervous thinking about the logistics of
-suddenly changing the time, but while the topic of changing from "God's time" to
-an official time was controversial, the actual change seems to have gone well.
+If you're like me, you get nervous thinking about the logistics of suddenly
+changing the time, but while the topic of changing from "God's time" to an
+official time was controversial, the actual change seems to have gone well.
 There was a [day of two
 noons](https://guides.loc.gov/this-month-in-business-history/november/day-of-two-noons)
-on November 18, 1883, and that was it. Incidentally, it wasn't until the 1918
-Standard Time Act that Congress actually acknowledged the new time scheme, but
-by then it was well known.
+on November 18, 1883, and official timekeepers (clocks and watches) were set to
+the correct time via telegraph. And that was it. Incidentally, it wasn't until
+the 1918 Standard Time Act that Congress actually acknowledged the new time
+scheme, but by then it was well known.
+
+\[SUNDAY HERALD SNIPPET\]
+
+Source: https://www.nyshistoricnewspapers.org
 
 ---
 
@@ -428,103 +466,136 @@ offset. The spikes are caused by the space heater in my office.
 
 ---
 
-More story here.
+It's time time got defined.
+
+To define the time, you need a few things:
+
+- An oscillator
+- A count of oscillations (the "epoch")
+- An origin
+
+An oscillator with a counter is called a _clock_, and the origin is called the
+"frame of reference." If you consider Earth's rotations as an oscillator, then
+the "day" is the counter, where "day" is a complete rotation of the Earth. The
+origin can be anything convenient, maybe the oscillation when Halley's comet
+last passed overhead, or a particular spring equinox. A particular clock is
+called a _timescale_.
+
+Before 1958, the heavenly bodies defined the common timescale. The second was
+defined as 1/86,400 of a solar day, which is the average time between apparent
+noon at some standard location, like the Royal Observatory in Greenwich. There
+are all kinds of quirks with this; a sampling:
+
+- Days are getting longer, because the Earth's rotation is slowing down. It's
+  esimated that 400 million years ago, there were only 20 hours in the day. This
+is caused by the friction of tides and the Sun's gravitational pull. It's
+related to the process that "froze the moon" facing the Earth.
+- There are variations in the rotation for other reasons. It's not a stable
+  oscillator, and the Earth's tilt varies over time, which causes other
+inconsistencies.
+- There are much more stable oscillators.
+
+"In 1958, the standard second was redefined as 1/31,556,925.9747 of the tropical
+year that began this century," (RFC 1305). The tropical year is the time the Sun
+takes to return to the same position in the sky from some perspective on Earth.
+This only lasted until 1967, because it was still not precise enough for modern
+needs. (The tropical year has an accuracy of only 50 ms and increases by 5ms per
+year.)
+
+In 1967, the second was redefined using changes in ground state transitions of
+the cesium-133 atom, in particular 1 second = 9,192,631,770 periods. A few years
+later in 1972, "time" has had a foundation of International Atomic Time (TAI),
+which is defined using the cesium state transition timescale alone. This is a
+very important time standard -- it underlies UTC, for example.
+
+TAI is a continuous average count of standard atomic seconds since 1958-01-01
+00:00:00 TAI. You might say, "Hey, that's defined in terms of TAI," and yeah, I
+was wondering about that myself. To understand the origin of TAI, you have to
+understand the standard Modified Julian Date (MJD). There's no space here for
+that, but in essence, it's a more precise version of our intuitive understanding
+of a calendar of recent events. Historical dates are vague, but modern dates are
+well tracked. In other words, the origin is determined from well-known
+atronomical observations.
+
+There are a lot of standards (UT, UT0, UT1, TAI, GMT, UTC) and I don't have the
+space or knowledge to distinguish between all of them. But I want to answer the
+question that started this whole history hunt.
+
+What's the difference between UTC and GMT? Coordinated Universal Time and
+Greenwhich Mean Time. The former is a variant of TAI that occasionally inserts
+leap seconds in order to stay in step with GMT. GMT is mean solar time (also
+known as local mean time) at the Royal Observatory in Greenwhich, London.
+
+UTC stays in step with GMT through leap seconds, which are inserted/deleted when
+the difference between GMT and UTC approaches 0.7 seconds. These leap seconds
+make UTC a non-continuous timescale. TAI on the other hand is continuous --
+there are no leap seconds (UTC = TAI - leap seconds). TAI will continue to drift
+out of sync with our intuition for "the time" based on the astral oscillations,
+but UTC, like so much of timekeeping, is social. Great pains have been taken to
+make it precise but intuitive.
 
 ---
 
+My NTP server has been keeping time for me for a week now while I researched
+this piece. I wanted the time. I got the time. All week I've been hunting for
+this idea of "the actual time" separate from how I understood it. And I haven't
+struggled alone. Sundials used to come with an _equation of time_ guide that
+translated the apparent solar time to the current mechanical ("mean"), so the
+purchaser could know with confidence what the "actual" time is.[^3]
 
-> ntpd does most computations in 64-bit floating point arithmetic and does
-> relatively clumsy 64-bit fixed point operations only when necessary to
-> preserve the ultimate precision, about 232 picoseconds. While the ultimate
-> precision is not achievable with ordinary workstations and networks of today,
-> it may be required with future gigahertz CPU clocks and gigabit LANs.
+> The availability of reliable, accurate timekeepers, working day and night, on
+> cloudy days and clear, led people to order their lives more and more by mean
+> time rather than the sun. Soon sundials were built with conversaion scales for
+> equation of time: instead of setting by the sun, people corrected the sun.
+> Thus was taken one more step toward that emancipation from the natural diurnal
+> rhythm that was begun with the substitution of equal hours for the varying
+> temporal hours of ancient and medieval times.
 >
-> https://linux.die.net/man/8/ntpd
+> _Revolution in Time, pp. 122-123.
 
-Debian has recently switched to using `ntpsec` as its primary NTP server
-(CLAIM), so a quick:
+[^3]: I should mention that there were also _equation clocks_, which used complicated mechanisms to convert from mean time to apparent solar time.
 
-```
-sudo apt-get update && sudo apt-get install ntpsec ntpsec-doc ntpsec-ntpviz
-```
+But even though we took one step away from natural time, we've taken a step back
+towards it. It's nice to know that our "official" coordinated time, UTC, has
+been jumping through hoops (or at least seconds) to keep time intuitive and
+convenient.
 
-was enough to get started. That's good because one of the main reasons I'm
-trying this out is to use `ntpviz`.
-
-```
-ntpq -p -ddd
-```
-
-Or if you're inside the program, you can use the commands documented in the man
-page I think. Don't worry about reading the spec, it's useless.
-
-See linux laptop (`~/Documents/notes/ntp`). Tomorrow, I'll see about the ntpviz
-side of things. I also still have to put together the narrative around why
-`ntpsec` isn't standard. What's sntp (simple ntp)? It was funny that there was
-controversy around the ntpsec folks. But I'll probably skip it for the article.
-
-# Clock museum
-We were at the clock museum today, a few notes:
-
-- Got good photos of the atomic clocks, or at least some component of the atomic
-  clocks.
-- Lots of good stories. Railroad motivated standard timekeeping, otherwise
-  people mostly used "apparent solar time" and sundials to set their clocks.
-- Sam mentioned that there was a time outage at the Colorado NIST standard
-  cesium clock. It's true! https://www.npr.org/2025/12/21/nx-s1-5651317/colorado-us-official-time-microseconds-nist-clocks
-- Got two books, Revolution in Time (anti clock) and _What is time?_, which I'm
-  reading now, since the mechanical part is shorter.
-- Sam gave me good tips on two technical, casual writers: Bob Pease and Jim
-  Williams. I have a Jim Williams book on pdf in our whatsapp. "You fix
-everything!"
-- Jerrold R. Zacharias is the "father of the atomic clock."
-- Nov 18, 1883 -- the day with 2 noons
-- 1918 standard time act
-- uniform time act of 1966
-- Ball time
-- Clocks stored in vaults. Main challenges are environmental conditions
-  (temperature, pressure, humidity, contaminants) and physical imperfections
-(inconsistent manufacturing, rough surfaces, parts that wear).
-- Electric horology, Alexander Bain.
-- How were chronometers set? Still need an answer. "Any clock used as a
-  navigational tool could not err more than a few seconds a day." (poster)
-- "Up until 1883, the majority of Americans obeyed _apparent solar time_, or
-  time told by the sun. Even though many people owned some type of mechanical
-timekeeper (which kept _mean time_), these clocks and watches were set by a
-sundial or the position of the sun itself." (poster)
-- Potential structure: history of timekeeping cut with my own adventure in ntp
-  (since ntp by itself isn't very fun).
-- Hours were more organic before periodic timekeepers; but asian technologists
-  invented precise water clocks that obeyed the variable hour lengths.
-- Transportation (especially at speed) and broadcasting (radio, TV) depended on
-  relatively accurate clocks.
-- Development of cesium atomic clocks: https://www.nist.gov/pml/time-and-frequency-division/popular-links/walk-through-time/walk-through-time-atomic-age-time
-  - NIST-F1 is accurate to 30 billionths of a second per year
-- Difference between UTC and GMT https://www.nist.gov/pml/time-and-frequency-division/popular-links/walk-through-time/walk-through-time-world-time-scales
+In the end, we all have the time. "The time" is a social construct, an event of
+the collective conscience, the one thing we can agree on because it was our
+agreement that defined it in the first place.
 
 
-Compare style:
-
-- We coordinate time to avoid train accidents.
-- The railroad coordinates time to avoid accidents.
-
-Principle: use clear subjects and verbs. Avoid "we (as a society, as engineers,
-etc.)".
-
-- I finished setting up the `ntp.conf` file, and I've started collecting stats.
-- The `ntp.conf` file is now set up, and stats have started collecting.
-
-Principle: if you're not a key player, let the objects occupy the subject.
-
-Poor writing, in my opinion: https://guides.loc.gov/this-month-in-business-history/november/day-of-two-noons
-Abusive use of the passive voice. Great bibliography, though.
-
-TODO: Clock frobbing? Sometimes it is diagnostically interesting to perturb your clock to watch how ntpd responds and makes corrections. This option does that. https://docs.ntpsec.org/latest/ntpfrob.html 
-
+# Sources
 
 - https://linux.die.net/sag/hw-sw-clocks.html
 - https://wiki.debian.org/DateTime
 - https://ntpsec.org
 - https://wiki.archlinux.org/title/Systemd-timesyncd
+- The National Watch and Clock Museum in Columbia, PA
+- _Revolution in Time_, David S. Landes, 1e
+- _What is Time?_, G. J. Whitrow
+- _The Design and Implementation of the FreeBSD Operating System_, 2e
+- RFC 1305, especially Appendix E: The NTP Timescale and its Chronometry.
+- https://www.nist.gov/pml/time-and-frequency-division/popular-links/walk-through-time/walk-through-time-atomic-age-time
+- https://www.nist.gov/pml/time-and-frequency-division/popular-links/walk-through-time/walk-through-time-world-time-scales
+- https://guides.loc.gov/this-month-in-business-history/november/day-of-two-noons
+- https://www.nyshistoricnewspapers.org
 
+# Other notes
+There's so much more to say about this topic, so much research I couldn't
+include here! A sampling of other interesting topics.
+
+- How time is kept in distributed systems and Lamport's article on clocks
+  (though I have an upcoming piece on this)
+- Special relativity and the meaning and relativity of the simultaneity of
+  events
+- The recent temporarily failure of an [NIST atomic clock](https://www.npr.org/2025/12/21/nx-s1-5651317/colorado-us-official-time-microseconds-nist-clocks)
+- Why your garden sundial doesn't work (and how to fix it)
+- Scams and scandals of US timekeeping authorities (who made a killing off of
+  giving preferential treatment to some watchmakers and not others)
+- Daylight savings time and the madness of crowds
+- This whole [Tom Scott video](https://www.youtube.com/watch?v=-5wpm-gesOY) and
+  how computers deal with calendars
+
+Ah oh well, maybe some other day.
 
