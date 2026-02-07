@@ -18,6 +18,12 @@ And here's the last tech (adjacent) talk I watched:
 
 {% include video id="FbV9EFHnGOE" provider="youtube" %}
 
+This is a [link]({% post_url 2026-01-27-ntp-in-30-seconds %})
+
+This is an image:
+
+![My alt text]({{ "/assets/images/bio-photo.jpg" | relative_url }})
+
 {: .notice--info}
 One thing I like to mention on these posts is that I'm a nerd.
 
