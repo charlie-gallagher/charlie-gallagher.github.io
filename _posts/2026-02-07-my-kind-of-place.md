@@ -61,12 +61,13 @@ the 'sta.
 [^1]: Marcel the Shell said it best: "It's still a group of people, but it's an audience, it's not a community." And dammit if that's not the whole thing.
 [^2]: Say what you will about Facebook (and I'd agree), but Facebook groups are unique for being about geographically spread out people with niche interests who are encouraged to get together in real life occasionally. cf. Meetup and Reddit.
 
-It's market forces for the creators. You can't monetize a subreddit, but you can
-monetize a YouTube channel. RSS feeds can't be monetized, and so the tech was
-nearly killed. But it's still widely available. And as old as Reddit is, it's
-still popular. It's a people site.[^3]
+It's market forces for the creators. You can't monetize a subreddit[^3], but you
+can monetize a YouTube channel. RSS feeds can't be monetized, and so the tech
+was nearly killed. But it's still widely available. And as old as Reddit is,
+it's still popular. It's a people site.[^4]
 
-[^3]: I recently learned that three of my favorite things about the Internet (RSS, Reddit, at least in principle, and the creative commons license) were all developed in part by Aaron Swartz. He had the right idea for the Internet.
+[^3]: You can earn money through Reddit by being what they consider to be a high quality contributor. The money's not the same as channel-focused sites, though.
+[^4]: I recently learned that three of my favorite things about the Internet (RSS, Reddit, at least in principle, and the creative commons license) were all developed in part by Aaron Swartz. He had the right idea for the Internet.
 
 I've fallen into the tech blogosphere lately, thanks to [this post from
 ClickHouse](https://clickhouse.com/blog/tech-blogs) and especially thanks to
