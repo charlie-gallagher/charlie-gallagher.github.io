@@ -249,7 +249,7 @@ Here's the diff with `repair_basic.py`.
 
 In practice, this was horrific for performance. The code is basically identical
 except now we're searching for the tab byte instead of the tab character, and
-we're writing bytes. But the benchmarks are kinda startling.
+we're writing bytes. But the benchmarks are kind of startling.
 
 
 ```
