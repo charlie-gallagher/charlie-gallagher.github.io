@@ -198,9 +198,9 @@ both.
 The file is encoded in utf-8, which has the nice property that any ACII byte
 uniquely identifies that ACII character. If you're interested in finding tabs
 `\t` (`0x09`), utf-8 ensures that no matter how many multi-byte characters you
-have, none of them will contain this byte.[^1]
+have, none of them will contain this byte.[^2]
 
-[^1]: To see this for yourself, note that in utf-8 multi-byte characters, the largest bit is always set. So no multi-byte character can contain `0x09`, where the largest bit is unset.
+[^2]: To see this for yourself, note that in utf-8 multi-byte characters, the largest bit is always set. So no multi-byte character can contain `0x09`, where the largest bit is unset.
 
 That means we can do away with decoding the bytes and just search for `0x09`, or
 in Python `b"\t"`. 
