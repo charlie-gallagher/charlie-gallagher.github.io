@@ -198,9 +198,13 @@ both.
 The file is encoded in utf-8, which has the nice property that any ACII byte
 uniquely identifies that ACII character. If you're interested in finding tabs
 `\t` (`0x09`), utf-8 ensures that no matter how many multi-byte characters you
-have, none of them will contain this byte.[^2]
+have, none of them will contain this byte. In utf-8 multi-byte characters, the
+largest bit is always set. So no multi-byte character can contain `0x09`, where
+the largest bit is unset.
 
-[^2]: To see this for yourself, note that in utf-8 multi-byte characters, the largest bit is always set. So no multi-byte character can contain `0x09`, where the largest bit is unset.
+![utf-8 encoding diagram]({{ "/assets/images/2026-tsv-repair/utf8.png" | relative_url }})
+
+Source: [https://badrish.net/papers/dp-sigmod19.pdf](https://badrish.net/papers/dp-sigmod19.pdf)
 
 That means we can do away with decoding the bytes and just search for `0x09`, or
 in Python `b"\t"`. 
@@ -530,6 +534,26 @@ I'd guess this is about the same.
 Avoiding extra work: generally no performance improvement, and the code was
 harder to read, so I'm not going to keep these optimizations.
 
+
+### Update: 2026-03-16
+I bumped the number of newlines up to 0.2 (1 in 5 cells has a newline in it) and
+found that, yes, the bytearray version of the code is a decent bit faster at
+this newline density. The basic version takes 26 seconds, while the bytebuffer
+only takes 19 seconds.
+
+```
+2026-03-16 09:58:58	repair_bytes_buffered_read_write	26.129120
+2026-03-16 09:59:46	repair_bytes_buffered_read_write_bytearray	19.367004
+2026-03-16 10:01:38	repair_bytes_buffered_read_write	25.511255
+2026-03-16 10:02:09	repair_bytes_buffered_read_write_bytearray	19.135691
+```
+
+This is a 1 million row file with 120 columns, which means that for a 0.2
+newline density, each line will have about `120 / 5 = 24` newlines in it. Put
+another way, each row of data will be spread across approximately 24 lines of
+the file.
+
+
 ## Multiprocessing
 1. ~~We don't need to decode utf-8 to count tabs~~
 2. ~~Buffer writes~~
@@ -559,6 +583,96 @@ But that's no good for the tests, so while it's an attractive idea, I won't be
 able to leave the files in pieces. To recombine the files, I would have to do
 another full read/write of the file, and most likely that would cost me too much
 time.
+
+### Update: 2026-03-16
+I returned to this today to see if I could implement the multiprocessing version
+of the TSV repair. Interestingly enough, I found that this problem cannot be
+efficiently multiprocessed in the way I thought it could.
+
+A row of data is only defined by the number of tabs. To split the file, we have
+to align each processor's chunk of the input file on a row boundary so that each
+partial file has only complete rows in it. If you have a table with 25 rows and
+5 columns, then the available boundaries are after 0 tabs, 5 tabs, 10, 15, and
+so on.
+
+You cannot start in the middle of the file and find a row boundary in all cases.
+If you happen to find a newline character followed by `n_column` tabs, that
+works, you've found a valid boundary. But in a file with a high density of
+newline characters, where each row is basically guaranteed to have one or more
+improperly quoted newlines, it becomes almost impossible to figure out where a
+row begins and ends.
+
+Consider the case where every cell has a newline character in it. If you track
+from the beginning of the file, you can correctly reassemble this dataset by
+counting tabs. But, if you start anywhere in the middle, it becomes impossible
+to decide where a row should begin and end. It's a mass of alternating newlines
+and tabs.
+
+We can't align on a row boundary without knowing how many tab characters have
+come before the current `seek` position, and we can't do that without indexing
+all of the tabs in the file. That's what we're already doing in the basic
+implementation of the TSV repair script, so I don't see a way for
+multiprocessing to be faster than sequential processing.
+
+That does get me thinking, though, how do other tools handle this for valid
+files? Imagine a TSV file that correctly quotes newline characters but has
+alternating newlines and tabs as before. In fact, since we're quoting, it's
+technically allowed to include _tabs_ in the quoted fields as well. If this were
+a CSV you can substitute commas.
+
+I'm going to use CSV format for clarity. Your worker might get assigned a `seek`
+position that looks like this:
+
+```
+,"
+"Hello, world!","Nice to meet you"
+```
+
+Spicing it up a little with some newlines:
+
+```
+,"
+"Hello,
+world!","
+Nice to meet you"
+```
+
+Can you align on a boundary? The first characters `,"\n` are ambiguous. The
+comma could be a quoted comma or a field delimiter. But we get more information
+with the following `"Hello`. If the first double quote started a string, the
+second would have to end one and be followed by a delimiter. Since the second
+quote is not followed by a delimiter, it must be preceded by one -- and it is (a
+newline, which delimits rows). So now that we've identified that the first quote
+is a _closing_ quote, we can be sure that the newline that followed it was the
+end of a row of data. This gives us enough information to say that `"Hello` is
+the beginning of a row, and we can align from there.
+
+Does this generally hold? Is it economical? I found a paper that discusses
+distributed CSV parsing, with examples that look a lot like my own examples
+above: ["Speculative Distributed CSV Data Parsing for Big Data
+Analytics"](https://badrish.net/papers/dp-sigmod19.pdf). The authors bring up a
+good point, which is that a production parser has to recognize invalid CSV files
+as well as valid ones. Here's the abstract:
+
+> There has been a recent flurry of interest in providing query capability on
+> raw data in today’s big data systems. These raw data must be parsed before
+> processing or use in analytics. Thus, a fundamental challenge in distributed
+> big data systems is that of efficient parallel parsing of raw data. The
+> difficulties come from the inherent ambiguity while independently parsing
+> chunks of raw data without knowing the context of these chunks. Specifically,
+> it can be difficult to find the beginnings and ends of fields and records in
+> these chunks of raw data. To parallelize parsing, this paper proposes a
+> speculation-based approach for the CSV format, arguably the most commonly used
+> raw data format. Due to the syntactic and statistical properties of the
+> format, speculative parsing rarely fails and therefore parsing is efficiently
+> parallelized in a distributed setting. Our speculative approach is also
+> robust, meaning that it can reliably detect syntax errors in CSV data. We
+> experimentally evaluate the speculative, distributed parsing approach in
+> Apache Spark using more than 11,000 real-world datasets, and show that our
+> parser produces significant performance benefits over existing methods.
+
+
+
 
 ## Memory mapping
 1. ~~We don't need to decode utf-8 to count tabs~~
