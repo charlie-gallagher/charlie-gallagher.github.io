@@ -136,7 +136,10 @@ confirm that the "repaired" version of various files matched a known-good
 processor.
 
 The performance is unstable, but generally very good. Performance seems to
-depend on how busy the system is with other, more "important" work.
+depend on how busy the system is with other, more "important" work. All of the
+workers are also accessing the same file, which creates the possibility for
+contention. They're all reads, but as the system flips from one process to
+another, file accesses become more random.
 
 Still, it's sometimes exceptional. The best recorded time so far was 3.04
 seconds, almost a 2x improvement on the previous best time. Here's a smattering
@@ -155,6 +158,29 @@ The trimmed mean is 4.9 seconds.
 
 When I turn on the feature that re-combines the files at the end, performance
 dips to more like 12 seconds per run, more or less as expected.
+
+## Update: 2026-03-18
+I ran more tests on this to see where the bottlenecks might be. I ran a very
+large file (10 GB) and the performance of the multiprocessing version of the
+code was about the same as the sequential version. A few things I noted:
+
+- I did optimize the alignment code, since this large file has 1200 columns in
+  it. But the alignment code is not the bottleneck, usually taking somewhere in
+the range of 1-2 milliseconds.
+- With only one worker, I found that each chunk of the file was processed in
+  only 2 seconds. If you kept that speed up, you would process the whole file in
+around 5-7 seconds.
+- With 4 workers, each chunk was processed in 6 seconds, and with 8 workers
+  (=vcpu) each took 12 seconds.
+
+So I/O contention is the most likely cause of the limited performance on large
+files. And of course multiprocessing is best when you can put multiple
+processors to work at once, doing calculations and whatnot. I found that when I
+increased the newline density to 0.2 again, the multiprocessing code was now
+significantly faster than the sequential code (14s compared to 26s). But even
+though this is I/O bound, multiprocessing seems to perform at least as well and
+often better than sequential processing.
+
 
 # Comments
 This was a serious bump in complexity and peskiness, but I'm thrilled with the
