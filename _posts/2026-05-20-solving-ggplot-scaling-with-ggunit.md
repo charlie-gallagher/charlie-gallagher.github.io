@@ -27,7 +27,7 @@ the `scaling` argument, you can increase and decrease dpi seamlessly, and that
 frees you to focus on relative proportions.
 
 Configuring proportions is straightforward in principle -- set the title size to
-2x the axis text size, and so on. But it wasn't clear what the unit should be.
+2x the axis text size, and so on. But it isn't clear what the unit should be.
 
 I found inches, millimeters, and points to be faulty. Inches are too coarse --
 it takes too many decimal places to accurately describe e.g. the width of a thin
