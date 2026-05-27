@@ -14,15 +14,12 @@ multiline comment	10
 2	bob	normal	8
 ```
 
-There's an unquoted multi-line field on the second line. I'm not aware of a TSV
-parser that can correctly parse this -- most consider it an invalid file, some
-NULL-fill the remaining fields on any line that has incomplete data.
+There’s an unquoted multi-line field on the second line. There's not a TSV
+parser on earth that will correctly parse this – most consider it an invalid
+file, some NULL-fill the remaining fields on any line that has incomplete
+data. And yet I get data from a certain source where, somehow, these errors
+proliferate, and I'd really like to fix it.
 
-I regularly ingest data from a particular data source that has this bad feature
-in it, and the problem has gotten worse recently. I've decided to fix it. The
-question is, "What's the best way to fix unquoted newline characters?"
-
-I created this repository with my results and some tooling for benchmarking and profiling: [https://github.com/charlie-gallagher/tsv-repair](https://github.com/charlie-gallagher/tsv-repair)
 
 # Problem statement
 Like the [Billion Row Challenge](https://www.morling.dev/blog/one-billion-row-challenge/), the goal is
@@ -56,6 +53,8 @@ i.e. replace the newline character with a space. If there are multiple newline
 characters in a row (`hello\n\nworld`), replace each one with a space. If a
 field starts or ends with a newline, you can still replace newlines with a
 space.
+
+I created this repository with my results and some tooling for benchmarking and profiling: [https://github.com/charlie-gallagher/tsv-repair](https://github.com/charlie-gallagher/tsv-repair)
 
 # Basic solution
 Here's a straightforward solution I came up with that passes all the tests.
@@ -126,21 +125,23 @@ Testing repair function against golden files in /Users/charlie/tsv-repair/test_f
 13/13 tests passed.
 ```
 
-Benchmark on large file:
 
-```
-2026-03-13 09:59:03	repair_basic	14.604409
-```
-
-The large file configuration for this run was: 1M rows, 120 columns, and 0.002
-likelihood that a cell contains a newline character. The file was 3.0 GB. You
-can generate a similar file using:
+I generated a large dataset for benchmarking. The configuration for this run
+was: 1M rows, 120 columns, and 0.002 likelihood that a cell contains a newline
+character. The file was 3.0 GB. You can generate a similar file using:
 
 ```
 python generate_large_file.py -r 1000000 -c 120 --newline-likelihood 0.002 
 ```
 
-There's a cProfile script as well. Here's the output:
+Benchmark on this large file says 14 seconds.
+
+```
+2026-03-13 09:59:03	repair_basic	14.604409
+```
+
+There's a cProfile script as well, to get a better view into where we're
+spending time. Here's the output:
 
 ```
 ❯ python3 profile_repair.py repair_basic.py 
@@ -170,21 +171,18 @@ Profiling repair_basic on large_file.tsv...
         1    0.000    0.000    0.000    0.000 <frozen codecs>:263(__init__)
 ```
 
-Most time was spent reading and writing, followed by counting tab characters.
-This is pretty much as you expect. This is an I/O bound program with some amount
-of calculation. Out of 20 seconds, 14s were spent on I/O. The other top
-hotspots were:
+This is an I/O bound program with some amount of calculation. Most time was
+spent reading and writing, followed by counting tab characters. Out of 20
+seconds in the cProfile run, 14s were spent on I/O. The other top hotspots were:
 
 - Decoding utf-8 (0.98s)
 - Removing newline characters with rstrip (0.14s)
 
 # Optimizations
-A good optimization would be to not write this in Python at all, but let's
-ignore that and assume we have to work in pure cPython. There are plenty of
-optimizations we can reach for -- some make more sense for an I/O-bound program
-and others are more appropriate for a CPU-bound program. Scanning the files is
-I/O-bound and fixing tabs involves an amount of CPU work, so it's worth checking
-both.
+There are plenty of optimizations we can reach for -- some make more sense for
+an I/O-bound program and others are more appropriate for a CPU-bound program.
+Scanning the files is I/O-bound and fixing tabs involves an amount of CPU work,
+so it's worth checking both.
 
 1. We can count tabs without decoding utf-8
 2. Buffer writes
