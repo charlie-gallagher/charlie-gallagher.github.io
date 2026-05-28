@@ -14,19 +14,18 @@ multiline comment	10
 2	bob	normal	8
 ```
 
-There’s an unquoted multi-line field on the second line. There's not a TSV
-parser on earth that will correctly parse this – most consider it an invalid
-file, some NULL-fill the remaining fields on any line that has incomplete
-data. And yet I get data from a certain source where, somehow, these errors
+There’s an unquoted multi-line field on the second line. Formally, this is
+unparseable[^1], but I get data from a certain source where, somehow, these errors
 proliferate, and I'd really like to fix it.
 
+[^1]: I do mean 'formally' here (otherwise what would this post be about?). There are some ambiguous cases that cannot be resolved without guessing, like when there's a newline character on its own line. You can't tell whether it belongs to the final field of the previous row or the first field of the following row. But also, there's not a parser on earth that will auto-repair this type of serialization issue.
 
 # Problem statement
 Like the [Billion Row Challenge](https://www.morling.dev/blog/one-billion-row-challenge/), the goal is
 to process large files as quickly as possible using some base programming
-language.[^1] In my case, I worked in base Python 3.13 on MacOS.
+language.[^2]
 
-[^1]: This problem space isn't as rich as the 1BR challenge, so there won't be as many exotic tricks, but it was still fun to work through it. For inspiration I looked back through [Doug Mercer's video](https://www.youtube.com/watch?v=utTaPW32gKY) on 1BR in Python. It's a great watch and has a number of nifty tricks.
+[^2]: This problem space isn't as rich as the 1BR challenge, so there won't be as many exotic tricks, but it was still fun to work through it. For inspiration I looked back through [Doug Mercer's video](https://www.youtube.com/watch?v=utTaPW32gKY) on 1BR in Python. It's a great watch and has a number of nifty tricks.
 
 Using pure python (stdlib), repair a large (10GB), utf-8 encoded TSV file with a
 knowable number of fields by (a) identifying incomplete lines, (b) combining
@@ -57,9 +56,11 @@ space.
 I created this repository with my results and some tooling for benchmarking and profiling: [https://github.com/charlie-gallagher/tsv-repair](https://github.com/charlie-gallagher/tsv-repair)
 
 # Basic solution
-Here's a straightforward solution I came up with that passes all the tests.
+Here's a straightforward solution I came up with that passes all the tests.[^3]
 There are one or two inelegancies, like the `_need_to_write` variable that keeps
 track of some state information, but it does the thing.
+
+[^3]: I'm running on an Macbook Pro from 2020, Intel processor.
 
 ```py
 def repair(input_file: str, output_file: str) -> None:
