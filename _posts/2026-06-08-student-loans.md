@@ -64,10 +64,10 @@ take the risk of having zero savings. I used my better judgment and made a plan
 instead to pay off everything by my 30th birthday, which is coming up in a week
 or two.
 
-Today settled my last account, $8K paid to EdFinancial Services. I still have to
-tally up how much I ultimately paid for college, but I'm sure it was over $130K.
-Would I do it again? I would. I wouldn't _like_ to, but this path led to a
-career that I'm passionate about. I can imagine a case where things turned out
+Today I settled my last account, $8K paid to EdFinancial Services. I still have
+to tally up how much I ultimately paid for college, but I'm sure it was over
+$130K.  Would I do it again? I would. I wouldn't _like_ to, but this path led to
+a career that I'm passionate about. I can imagine a case where things turned out
 differently, but fortunately, I don't have to consider that anymore. Me and the
 bursar's office, we've parted ways. Good riddance, and good luck.
 
