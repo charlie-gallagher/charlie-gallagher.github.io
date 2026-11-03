@@ -7,7 +7,7 @@ date: 2026-11-03
 I want to talk about this book, _The Inner Game of Tennis_ by W. Timothy
 Gallwey, but somehow without sounding preachy. At it's core it's a book about
 sports psychology, with an admixture of self help, and while I like sports
-psychology, anything with a wiff of self help makes me uneasy. As a genre, self
+psychology, anything with a whiff of self help makes me uneasy. As a genre, self
 help preys on people's nagging feeling that there's some secret out there that
 they don't yet know, but can quickly learn, which will solve all of their
 problems with effective habits, weight loss, making money, or influencing
