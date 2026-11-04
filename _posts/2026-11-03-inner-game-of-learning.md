@@ -5,7 +5,7 @@ date: 2026-11-03
 ---
 
 I want to talk about this book, _The Inner Game of Tennis_ by W. Timothy
-Gallwey, but somehow without sounding preachy. At it's core it's a book about
+Gallwey, but somehow without sounding preachy. At its core it's a book about
 sports psychology, with an admixture of self help, and while I like sports
 psychology, anything with a whiff of self help makes me uneasy. As a genre, self
 help preys on people's nagging feeling that there's some secret out there that
@@ -34,13 +34,13 @@ improving at something when I'm not doing it at all.
 
 For a time I assumed it was because my brain/nervous system needed a break to
 cement good habits, or something. That muscle memory worked better with breaks.
-But that just didn't feel like the right answer.
+But that just didn't feel like the right answer. And if my mind was just a bit
+clearer on returning, that doesn't seem to explain the way I get measurably
+better after a break. Not just returning to peak form, but actual improvement.
 
 And then I read _The Inner Game of Tennis_, which I had been recommended once or
 twice on the internet, and sure enough it breaks the whole thing wide open. This
-phenomenon of breaks causing improvement, which I've spent years collecting
-evidence for but never had a convincing hypothesis to explain, suddenly felt
-understandable.
+phenomenon of breaks causing improvement suddenly felt understandable.
 
 One of Gallwey's points is that we are "in the zone" when we're both at ease and
 alert, with our full attention on the activity we're doing. The zone is fragile
@@ -71,11 +71,16 @@ better?" to "Remember what you like so much about this?"
 
 It's no wonder I do the thing better than before!
 
-Now... how do you harness that so you can do well _without_ taking a long break?
-That's the real subject of Gallwey's book. So that's my recommendation -- to all
-those who are stuck, cursed with knowing the right idea but not being able to
-execute it ("Head down!"), or are simply not having fun, take a read through
-this book and see if it doesn't help.
+The improvement is not just a result of rest or settling in of the nervous
+system. My mind is clearer and unconcerned, but focused, and that leads to
+better all-around performance. But interestingly, a short period after I return
+to my hobby, things get cluttered again.
+
+So... how do you harness this clear-mindedness so you can do well _without_
+taking a long break?  That's the real subject of Gallwey's book. So that's my
+recommendation -- to all those who are stuck, cursed with knowing the right idea
+but not being able to execute it ("Head down!"), or are simply not having fun,
+take a read through this book and see if it doesn't help.
 
 Some other recommended reading:
 
@@ -95,11 +100,11 @@ to focus ("Take dead aim!"), and, incidentally, with my short game.
 And some other things that Gallwey's book helped me understand:
 
 - Verbal advice is rarely helpful.
-- A bad habit is simply a desperate, ineffective solution to a problem. If you
-  find a better solution, bad habits disappear quite easily. (In school, I found
-it easy to change how I wrote certain letters if I found a form I liked better.
-All I did every day was write, so if habits were hard to break, this should've
-been impossible.)
+- A bad habit is simply a crude solution to a real problem. If you find a better
+  solution, bad habits disappear quite easily. (In school, I found it easy to
+change how I wrote certain letters if I found a form I liked better.  All I did
+every day was write, so if habits were hard to break, this should've been
+impossible.)
 - I was asked to design the cocktail napkin for my friend's wedding -- a sketch
   of her two bunny rabbits. I'm emphatically not a professional artist, but I
 accepted. I did dozens of drafts without finding one that I liked, and the
