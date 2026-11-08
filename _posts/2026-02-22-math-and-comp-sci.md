@@ -198,6 +198,8 @@ mathematicians did. He knew quite a few of them. Did he already appreciate that
 math isn't just given in books, but thought, rethought, argued about, and
 revised? (He probably did.)
 
+**Update:** [He did not.]({% post_url 2026-11-08-followups %})
+
 ---
 
 Like in any tradition, it's hard to jump into mathematics. The most important

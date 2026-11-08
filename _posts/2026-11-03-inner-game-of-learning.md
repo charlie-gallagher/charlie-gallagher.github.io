@@ -85,7 +85,8 @@ take a read through this book and see if it doesn't help.
 Some other recommended reading:
 
 - _Zen in the Art of Archery_. Classic text on zen performance (from which
-  Gallwey takes a large influence).
+  Gallwey takes a some influence). **Update:** safe to skip this one, see this
+[follow-up]({% post_url 2026-11-08-followups %})
 - [Ratings Fear and Loathing](https://www.pathtochessmastery.com/2011/10/ratings-fear-and-loathing.html).
 Great blogpost about chess ratings in particular. It's hepled me a lot with my
 rating worries when I play Go. The rest of this blog is great, too, for brain
