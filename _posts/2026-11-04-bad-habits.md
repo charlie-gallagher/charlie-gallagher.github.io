@@ -34,7 +34,7 @@ Here's W. Timothy Gallwey on bad habits:
 > these habits are serving, so that if we learn a better way to achieve the same
 > end, we can do so. We never repeat any behavior which isn't serving some
 > function or purpose. It is difficult to become aware of the function of any
-> pattern of behavior while we are in the process of blaiming ourselves for
+> pattern of behavior while we are in the process of blaming ourselves for
 > having a "bad habit." But when we stop trying to suppress or correct the
 > habit, we can see the function it serves, and then an alternative pattern of
 > behavior, which serves the same function better, emerges quite effortlessly.
